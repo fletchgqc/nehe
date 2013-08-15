@@ -1,0 +1,78 @@
+<Body:>
+  <p>Registration for {{agName}}, {{season}} {{year}}</p>
+  <div class="row">
+    <div class="span8">
+      <table class="table table-striped" style="{#unless _page.registrations}display:none{/}">
+        <thead>
+          <tr>
+            <th>AG</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          {#each _page.registrations}
+            <tr>
+              <td>{.agName}</td>
+              <td><a href="/registrations/{.id}">{.name}</a></td>
+              <td>{.age}</td>
+              <td>{.gender}</td>
+              <td>{.comments}</td>
+            </tr>
+          {/}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div style="display:table-cell">
+  <h2>
+    {{#if _page.registration.id}}
+      Edit {_page.registration.name}
+      <a x-bind="click: deleteRegistration" style="float:right;margin-top:3px" class="btn btn-danger">Delete</a>
+    {{else}}
+      Add a new registration
+    {{/}}
+  </h2>
+  <p></p>
+  <form class="well" x-bind="submit: done" >
+    <div class="row">
+      <div class="span3">        
+        <app:field label="Name" error={_page.nameError}>
+          <input type="text" id="name" value={_page.registration.name} autofocus={{not(_page.registration.id)}}>
+        </app:field>
+
+        <app:field label="Age">
+          <input x-atomic type="text" value={_page.registration.age}>
+        </app:field>
+      </div>
+      <div class="span3">
+        <app:field label="Gender">
+          <boot:dropdown value={_page.registration.gender}>
+            <boot:option>Male</boot:option>
+            <boot:option>Female</boot:option>
+          </boot:dropdown>
+        </app:field>
+
+        <app:field label="Comments">
+          <input x-atomic type="text" value={_page.registration.comments}>
+        </app:field>
+      </div>
+    </div>
+    <p></p>
+    <button class="btn btn-primary" type="submit">
+      {{#if _page.registration.id}}Done{{else}}Add registration{{/}}
+    </button>
+    {{#unless _page.registration.id}}
+      &sp;<button class="btn" type="button" x-bind="click: cancel">Cancel</button>
+    {{/}}
+  </form>
+</div>
+
+<field: nonvoid>
+  <fieldset class="control-group {#if @error}error{/}">
+    <label>{{@label}}</label>
+    {{@content}}
+  </fieldset>

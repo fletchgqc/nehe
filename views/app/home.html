@@ -1,0 +1,41 @@
+<Body:>
+  <div class="hero-unit">
+    <h1>Nehemiah</h1>
+    <h3>Create or View AG Registration</h3>
+    <form class="well" x-bind="submit: gotoRegistration" >
+    	<app:field label="AG">
+        	<boot:dropdown value={_page.registration.agName}>
+        		{{#each agNames as :agName}}
+            		<boot:option>{{:agName}}</boot:option>
+            	{{/}}
+          	</boot:dropdown>
+        </app:field>
+    	<app:field label="Year">
+        	<boot:dropdown value={_page.registration.year}>
+        		{{#each years as :year}}
+            		<boot:option>{{:year}}</boot:option>
+            	{{/}}
+          	</boot:dropdown>
+        </app:field>
+    	<app:field label="Season">
+        	<boot:dropdown value={_page.registration.season}>
+        		{{#each seasons as :season}}
+            		<boot:option>{{:season}}</boot:option>
+            	{{/}}
+          	</boot:dropdown>
+        </app:field>
+        <button class="btn btn-primary" type="submit">
+      		Go
+    	</button>
+    </form>
+      <a class="btn btn-primary btn-large" href="/people/new">
+        Add somebody &raquo;
+      </a>
+    </p>
+  </div>
+
+<field: nonvoid>
+  <fieldset class="control-group {#if @error}error{/}">
+    <label>{{@label}}</label>
+    {{@content}}
+  </fieldset>
