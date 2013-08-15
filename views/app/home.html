@@ -1,38 +1,29 @@
 <Body:>
-  <div class="hero-unit">
-    <h1>Nehemiah</h1>
-    <h3>Create or View AG Registration</h3>
-    <form class="well" x-bind="submit: gotoRegistration" >
-    	<app:field label="AG">
-        	<boot:dropdown value={_page.registration.agName}>
+    <h1>Welcome to Nehemiah</h1>
+    <p>This application allows you to administer inscriptions for Assembly events, like GVs, AGMs and MBPs.</p>
+    <div class="selectbox">
+        <h3>Create or View AG Registration</h3>
+        <form action="registrations/ag" method="get">
+    	   	<select name="agName">
         		{{#each agNames as :agName}}
-            		<boot:option>{{:agName}}</boot:option>
+            		<option>{:agName}</option>
             	{{/}}
-          	</boot:dropdown>
-        </app:field>
-    	<app:field label="Year">
-        	<boot:dropdown value={_page.registration.year}>
-        		{{#each years as :year}}
-            		<boot:option>{{:year}}</boot:option>
-            	{{/}}
-          	</boot:dropdown>
-        </app:field>
-    	<app:field label="Season">
-        	<boot:dropdown value={_page.registration.season}>
+          	</select>
+            <select name="season">
         		{{#each seasons as :season}}
-            		<boot:option>{{:season}}</boot:option>
+            		<option>{{:season}}</option>
             	{{/}}
-          	</boot:dropdown>
-        </app:field>
-        <button class="btn btn-primary" type="submit">
-      		Go
-    	</button>
-    </form>
-      <a class="btn btn-primary btn-large" href="/people/new">
-        Add somebody &raquo;
-      </a>
-    </p>
-  </div>
+            </select>
+            <select name="year">
+                {{#each years as :year}}
+                    <option>{{:year}}</option>
+                {{/}}
+            </select>
+            <button type="submit">
+          		Go
+        	</button>
+        </form>
+    </div>
 
 <field: nonvoid>
   <fieldset class="control-group {#if @error}error{/}">
