@@ -1,0 +1,22 @@
+<Body:>
+  {#unless _page.seasons}
+    <h3>No seasons added yet.</h3>
+    <p>How about <a href="/seasons/new">adding one</a>?</p>
+  {/}
+  <table class="table table-striped" style="{#unless _page.seasons}display:none{/}">
+    <thead>
+      <tr>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      {#each _page.seasons}
+        <tr>
+          <td><a href="/seasons/{.id}">{.name}</a></td>
+        </tr>
+      {/}
+    </tbody>
+  </table>
+  {#if _page.seasons}
+    <h3><a href="/seasons/new">New season</a></h3>
+  {/}

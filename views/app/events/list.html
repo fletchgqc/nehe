@@ -1,0 +1,23 @@
+<Body:>
+  <h2>Events for {_page.season.name} {_page.year}</h2>
+  {#unless _page.events}
+    <h3>No Events exist for this period yet.</h3>
+    <p>How about <a href="/events/new?seasonId={_page.season.id}&year={_page.year}">adding one</a>?</p>
+  {/}
+  <table class="table table-striped" style="{#unless _page.events}display:none{/}">
+    <thead>
+      <tr>
+        <th>Location</th>
+      </tr>
+    </thead>
+    <tbody>
+      {#each _page.events}
+        <tr>
+          <td><a href="/events/{.id}">{.location}</a></td>
+        </tr>
+      {/}
+    </tbody>
+  </table>
+  {#if _page.events}
+    <h3><a href="/events/new?seasonId={_page.season.id}&year={_page.year}">New Event</a></h3>
+  {/}

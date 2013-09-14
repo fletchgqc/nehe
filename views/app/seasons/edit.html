@@ -1,0 +1,29 @@
+<Body:>
+  <h2>
+    {{#if _page.season.id}}
+      Edit {_page.season.name}
+      <a x-bind="click: deleteSeason" style="float:right;margin-top:3px" class="btn btn-danger">Delete</a>
+    {{else}}
+      Add a New Season
+    {{/}}
+  </h2>
+  <p></p>
+  <form x-bind="submit: saveSeason" >
+    <app:field label="Name" error={_page.nameError}>
+      <input type="text" id="name" value={_page.season.name} autofocus={{not(_page.season.id)}}>
+    </app:field>
+    <p></p>
+    <button class="btn btn-primary" type="submit">
+      {{#if _page.season.id}}Done{{else}}Add season{{/}}
+    </button>
+    {{#unless _page.season.id}}
+      &sp;<button class="btn" type="button" x-bind="click: cancel">Cancel</button>
+    {{/}}
+  </form>
+</div>
+
+<field: nonvoid>
+  <fieldset class="{#if @error}error{/}">
+    <label>{{@label}}</label>
+    {{@content}}
+  </fieldset>

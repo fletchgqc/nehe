@@ -1,0 +1,22 @@
+<Body:>
+  {#unless _page.ags}
+    <h3>No AGs added yet.</h3>
+    <p>How about <a href="/ags/new">adding one</a>?</p>
+  {/}
+  <table class="table table-striped" style="{#unless _page.ags}display:none{/}">
+    <thead>
+      <tr>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      {#each _page.ags}
+        <tr>
+          <td><a href="/ags/{.id}">{.name}</a></td>
+        </tr>
+      {/}
+    </tbody>
+  </table>
+  {#if _page.ags}
+    <h3><a href="/ags/new">New AG</a></h3>
+  {/}

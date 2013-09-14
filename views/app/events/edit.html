@@ -1,0 +1,39 @@
+<Body:>
+  <h2>
+    {{#if _page.event.id}}
+      Edit {_page.event.name}
+      <a x-bind="click: deleteEvent" style="float:right;margin-top:3px" class="btn btn-danger">Delete</a>
+    {{else}}
+      Add a New Event
+    {{/}}
+  </h2>
+  <p></p>
+  <form x-bind="submit: saveEvent" >
+    <app:field label="Location" error={_page.nameError}>
+      <input type="text" id="location" value={_page.event.location} autofocus={{not(_page.event.id)}}>
+    </app:field>
+    <select name="season">
+      {{#each _page.seasons}}
+        <option value={{.id}} selected="{equal(_page.event.seasonId, .id)}">{{.name}}</option>
+      {{/}}
+    </select>
+    <select name="year">
+      {{#each _page.years as :year}}
+        <option selected="{equal(_page.event.year, :year)}">{{:year}}</option>
+      {{/}}
+    </select>
+    <p></p>
+    <button class="btn btn-primary" type="submit">
+      {{#if _page.event.id}}Done{{else}}Add Event{{/}}
+    </button>
+    {{#unless _page.event.id}}
+      &sp;<button class="btn" type="button" x-bind="click: cancel">Cancel</button>
+    {{/}}
+  </form>
+</div>
+
+<field: nonvoid>
+  <fieldset class="{#if @error}error{/}">
+    <label>{{@label}}</label>
+    {{@content}}
+  </fieldset>

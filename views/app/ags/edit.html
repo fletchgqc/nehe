@@ -1,0 +1,34 @@
+<Body:>
+  <h2>
+    {{#if _page.ag.id}}
+      Edit {_page.ag.name}
+      <a x-bind="click: deleteAg" style="float:right;margin-top:3px" class="btn btn-danger">Delete</a>
+    {{else}}
+      Add a New AG
+    {{/}}
+  </h2>
+  <p></p>
+  <form x-bind="submit: saveAg" >
+    <app:field label="Name" error={_page.nameError}>
+      <input type="text" id="name" value={_page.ag.name} autofocus={{not(_page.ag.id)}}>
+    </app:field>
+    <select name="area">
+      {{#each _page.areas}}
+        <option value={{.id}} selected="{equal(_page.ag.area.id, .id)}">{{.name}}</option>
+      {{/}}
+    </select>
+    <p></p>
+    <button class="btn btn-primary" type="submit">
+      {{#if _page.ag.id}}Done{{else}}Add AG{{/}}
+    </button>
+    {{#unless _page.ag.id}}
+      &sp;<button class="btn" type="button" x-bind="click: cancel">Cancel</button>
+    {{/}}
+  </form>
+</div>
+
+<field: nonvoid>
+  <fieldset class="{#if @error}error{/}">
+    <label>{{@label}}</label>
+    {{@content}}
+  </fieldset>

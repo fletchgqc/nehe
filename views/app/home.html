@@ -4,14 +4,14 @@
     <div class="selectbox">
         <h3>Create or View AG Registration</h3>
         <form action="registrations/ag" method="get">
-    	   	<select name="agName">
-        		{{#each agNames as :agName}}
-            		<option>{:agName}</option>
+    	   	<select name="agId">
+        		{{#each _page.ags}}
+            		<option value={.id}>{.name}</option>
             	{{/}}
           	</select>
-            <select name="season">
-        		{{#each seasons as :season}}
-            		<option>{{:season}}</option>
+            <select name="seasonId">
+        		{{#each _page.seasons}}
+            		<option value={.id}>{.name}</option>
             	{{/}}
             </select>
             <select name="year">

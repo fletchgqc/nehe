@@ -1,0 +1,29 @@
+<Body:>
+    <h1>Nehemiah Administration</h1>
+    <p>Only governors are able to access this page.</p>
+    <h2>Basic Settings</h2>
+    <ul>
+      <li><a href="/areas">Areas</a></li>
+      <li><a href="/ags">AGs</a></li>
+      <li><a href="/seasons">Seasons</a></li>
+    </ul>
+
+    <div class="selectbox">
+        <h3>Administer Events</h3>
+        <p>Create and modify GVs etc for</p>
+        <form action="events" method="get">
+            <select name="seasonId">
+              {#each _page.seasons}
+                <option value="{.id}">{.name}</option>
+              {/}
+            </select>
+            <select name="year">
+                {{#each years as :year}}
+                    <option>{{:year}}</option>
+                {{/}}
+            </select>
+            <button type="submit">
+              Go
+          </button>
+        </form>
+    </div>

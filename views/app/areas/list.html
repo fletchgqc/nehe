@@ -1,0 +1,22 @@
+<Body:>
+  {#unless _page.areas}
+    <h3>No areas added yet.</h3>
+    <p>How about <a href="/areas/new">adding one</a>?</p>
+  {/}
+  <table class="table table-striped" style="{#unless _page.areas}display:none{/}">
+    <thead>
+      <tr>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      {#each _page.areas}
+        <tr>
+          <td><a href="/areas/{.id}">{.name}</a></td>
+        </tr>
+      {/}
+    </tbody>
+  </table>
+  {#if _page.areas}
+    <h3><a href="/areas/new">New area</a></h3>
+  {/}
