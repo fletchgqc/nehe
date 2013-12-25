@@ -1,0 +1,55 @@
+<Body:>
+  <h2>Custom Details for Events in {_page.season.name} {_page.year}</h2>
+  {#each _page.event.details}
+    <div style="float:left">
+      <h4>{.question}</h4><br>
+      {#if .answers}
+        <select>
+          {#each .answers) as :alternative}
+            <option>{:alternative}</option>
+          {/}
+        </select>
+      {else}
+        <input type="text"/>
+      {/}
+    </div>
+  {/}
+
+  <h2>Add a New Detail</h2>
+  <div style="float:left; width: 300px">
+    <h3>Properties</h3>
+    <form x-bind="submit: saveDetail" >
+      <app:field label="Question">
+        <input type="text" id="question" value={_page.detail.question}>
+      </app:field>
+      <app:field label="Answers">
+        <textarea id="answers">{_page.detail.answers}</textarea>
+      </app:field>
+
+    <button class="btn btn-primary" type="submit">
+      {{#if _page.event.id}}Done{{else}}Add Detail{{/}}
+    </button>
+    {{#unless _page.event.id}}
+      &sp;<button class="btn" type="button" x-bind="click: cancel">Cancel</button>
+    {{/}}
+    </form>
+  </div>
+
+  <div style="float:left; margin-left: 40px">
+    <h3>Demo</h3>
+    <p>{_page.detail.question}</p>
+    {#if _page.detail.answers}
+      <select>
+        {unescaped createAnswerSelect(_page.detail.answers)}
+      </select>
+    {else}
+      <p><input type="text"/></p>
+    {/}
+  </div>
+</div>
+
+<field: nonvoid>
+  <fieldset class="{#if @error}error{/}">
+    <label>{{@label}}</label>
+    {{@content}}
+  </fieldset>
